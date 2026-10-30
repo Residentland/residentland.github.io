@@ -1,4 +1,4 @@
-baseURL = "https://www.residentland.info/"
+baseURL = "https://residentland.info/"
 locale = "en"
 title = "Resident"
 capitalizeListTitles = false
