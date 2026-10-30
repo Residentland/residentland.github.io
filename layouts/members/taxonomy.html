@@ -1,0 +1,17 @@
+{{ define "main" }}
+{{ partial "page-head.html" (dict "page" . "kicker" "// the crew") }}
+
+<div class="wrap">
+  <div class="nfo-box">
+    <p class="nfo-banner" aria-hidden="true">░▒▓█ R E S I D E N T █▓▒░</p>
+    {{ range slice (dict "title" "Active" "active" true) (dict "title" "Inactive" "active" false) }}
+      <h2 class="nfo-h">{{ .title }}</h2>
+      <ul class="roster">
+        {{ range where hugo.Data.members "active" .active }}
+          {{ partial "member-row.html" . }}
+        {{ end }}
+      </ul>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

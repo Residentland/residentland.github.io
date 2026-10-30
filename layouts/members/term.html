@@ -1,0 +1,25 @@
+{{ define "main" }}
+{{ $handle := .Data.Term }}
+{{ $m := index (where hugo.Data.members "handle" $handle) 0 }}
+
+<section class="page-head wrap">
+  <p class="kicker"><a href="{{ .Parent.RelPermalink }}">// members</a></p>
+  <h1 class="handle-title">{{ $handle }}</h1>
+  {{ with $m }}
+    <p class="lede">
+      {{ with .roles }}{{ delimit . " · " }}{{ end }}
+      <span class="status{{ if .active }} is-active{{ end }}">{{ cond .active "active" "inactive" }}</span>
+    </p>
+  {{ end }}
+  {{ .Content }}
+</section>
+
+<div class="wrap block">
+  <header class="sec-head">
+    <h2>{{ len .Pages }} {{ cond (eq (len .Pages) 1) "prod" "prods" }}</h2>
+  </header>
+  <div class="prod-grid">
+    {{ range .Pages.ByDate.Reverse }}{{ partial "prod-card.html" . }}{{ end }}
+  </div>
+</div>
+{{ end }}

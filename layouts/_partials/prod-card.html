@@ -1,0 +1,13 @@
+{{ $img := .Resources.GetMatch "screen.*" }}
+<article class="prod-card" data-format="{{ .Params.format | urlize }}">
+  <a href="{{ .RelPermalink }}">
+    <div class="screen crt">
+      {{ with $img }}<img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="" loading="lazy">{{ end }}
+      <span class="badge" data-format="{{ .Params.format | urlize }}">{{ .Params.format }}</span>
+    </div>
+    <div class="prod-meta">
+      <h3>{{ .Title }}</h3>
+      <p>{{ .Params.platform }}{{ with .Params.party }} · {{ .name }}{{ end }} · {{ .Date.Year }}</p>
+    </div>
+  </a>
+</article>

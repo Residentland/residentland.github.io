@@ -1,0 +1,17 @@
+{{ define "main" }}
+{{ partial "page-head.html" (dict "page" . "kicker" "// links") }}
+
+<div class="wrap">
+  <ul class="link-grid">
+    {{ range hugo.Data.links }}
+      <li>
+        <a class="link-card" href="{{ .url }}">
+          <span class="link-name">{{ .name }}</span>
+          <span class="link-desc">{{ .desc }}</span>
+          <span class="link-host">{{ (urls.Parse .url).Host | strings.TrimPrefix "www." }} ↗</span>
+        </a>
+      </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

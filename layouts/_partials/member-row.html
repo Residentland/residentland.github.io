@@ -1,0 +1,11 @@
+{{ $term := site.GetPage (printf "/members/%s" .handle) }}
+<li class="member{{ if .active }} is-active{{ end }}">
+  {{ if $term }}
+    <a class="handle" href="{{ $term.RelPermalink }}">{{ .handle }}</a>
+  {{ else }}
+    <span class="handle">{{ .handle }}</span>
+  {{ end }}
+  <span class="leader" aria-hidden="true"></span>
+  <span class="roles">{{ with .roles }}{{ delimit . " · " }}{{ else }}—{{ end }}</span>
+  {{ with $term }}<span class="count">{{ len .Pages }} {{ cond (eq (len .Pages) 1) "prod" "prods" }}</span>{{ end }}
+</li>

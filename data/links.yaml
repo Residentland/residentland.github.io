@@ -1,0 +1,24 @@
+- name: Turkish Demoscene Forum
+  url: http://www.tr-demoscene.info/
+  desc: Home of the Turkish scene
+- name: Pouet
+  url: https://www.pouet.net/
+  desc: The demoscene prod database
+- name: CSDb
+  url: https://csdb.dk/
+  desc: Commodore 64 scene database
+- name: Bitfellas
+  url: https://www.bitfellas.org/
+  desc: Scene news and community
+- name: Scene.org
+  url: https://www.scene.org/
+  desc: The scene's file archive
+- name: Scenemusic
+  url: https://www.scenemusic.net/
+  desc: Nectarine demoscene radio
+- name: Artcity
+  url: http://artcity.bitfellas.org/
+  desc: Scene graphics gallery
+- name: SceneSat Radio
+  url: https://scenesat.com/
+  desc: Live sets from the parties

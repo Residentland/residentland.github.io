@@ -1,0 +1,29 @@
+{{ define "main" }}
+{{ $prods := (where site.RegularPages "Section" "prods").ByDate }}
+
+{{/* Hero */}}
+<section class="hero">
+  <canvas id="fx" class="fx" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <h1 class="visually-hidden">{{ site.Title }}</h1>
+    <canvas id="fx-logo" class="fx-logo" width="328" height="113" data-src="{{ "images/logo.gif" | relURL }}" aria-hidden="true"></canvas>
+    <noscript><img class="fx-logo" src="{{ "images/logo.gif" | relURL }}" width="300" height="113" alt="{{ site.Title }}"></noscript>
+    <p class="hero-tag">{{ site.Params.tagline }}</p>
+    <div class="hero-cta">
+      <a class="btn btn-hot" href="{{ "prods/" | relURL }}">Our prods</a>
+      <a class="btn" href="{{ site.Params.pouet }}">Pouet</a>
+      <a class="btn" href="{{ site.Params.demozoo }}">Demozoo</a>
+    </div>
+  </div>
+</section>
+
+{{/* All prods */}}
+<section class="wrap block">
+  <header class="sec-head">
+    <h2>Productions</h2>
+  </header>
+  <div class="prod-grid">
+    {{ range $prods.Reverse }}{{ partial "prod-card.html" . }}{{ end }}
+  </div>
+</section>
+{{ end }}

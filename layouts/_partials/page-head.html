@@ -1,0 +1,5 @@
+<section class="page-head wrap">
+  {{ with .kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+  <h1>{{ .page.Title }}</h1>
+  {{ with .page.Content }}<div class="lede">{{ . }}</div>{{ end }}
+</section>

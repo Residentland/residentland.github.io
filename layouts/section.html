@@ -1,0 +1,22 @@
+{{ define "main" }}
+{{ partial "page-head.html" (dict "page" . "kicker" "// transmissions") }}
+
+<div class="wrap narrow">
+  {{ range .Paginator.Pages }}
+    <article class="post-item">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      <p>{{ .Summary | plainify | truncate 220 }}</p>
+    </article>
+  {{ end }}
+
+  {{ with .Paginator }}
+    {{ if gt .TotalPages 1 }}
+      <nav class="prev-next" aria-label="Pages">
+        {{ with .Next }}<a class="older" href="{{ .URL }}"><small>← Older</small>Page {{ .PageNumber }}</a>{{ end }}
+        {{ with .Prev }}<a class="newer" href="{{ .URL }}"><small>Newer →</small>Page {{ .PageNumber }}</a>{{ end }}
+      </nav>
+    {{ end }}
+  {{ end }}
+</div>
+{{ end }}

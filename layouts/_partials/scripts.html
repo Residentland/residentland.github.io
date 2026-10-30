@@ -1,0 +1,6 @@
+{{ $site := resources.Get "js/site.js" | minify | fingerprint }}
+<script src="{{ $site.RelPermalink }}" integrity="{{ $site.Data.Integrity }}" defer></script>
+{{ if .IsHome }}
+  {{ $fx := resources.Get "js/fx.js" | minify | fingerprint }}
+  <script src="{{ $fx.RelPermalink }}" integrity="{{ $fx.Data.Integrity }}" defer></script>
+{{ end }}

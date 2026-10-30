@@ -1,0 +1,18 @@
+{{ define "main" }}
+<article class="wrap narrow post">
+  <header class="page-head">
+    {{ if eq .Section "news" }}
+      <p class="kicker"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time></p>
+    {{ end }}
+    <h1>{{ .Title }}</h1>
+  </header>
+  <div class="prose">{{ .Content }}</div>
+
+  {{ if eq .Section "news" }}
+    <nav class="prev-next" aria-label="More news">
+      {{ with .PrevInSection }}<a class="older" href="{{ .RelPermalink }}"><small>← Older</small>{{ .Title }}</a>{{ end }}
+      {{ with .NextInSection }}<a class="newer" href="{{ .RelPermalink }}"><small>Newer →</small>{{ .Title }}</a>{{ end }}
+    </nav>
+  {{ end }}
+</article>
+{{ end }}

@@ -1,0 +1,50 @@
+# Crew roster. "handle" must match the names used in a prod's `members:` list.
+- handle: spritus
+  roles: [code, gfx, organizer]
+  active: true
+- handle: tesla
+  roles: [code]
+  active: true
+- handle: flexi
+  roles: [code, music]
+  active: true
+- handle: erik
+  roles: [code]
+  active: true
+
+- handle: decipher
+  roles: [code]
+  active: false
+- handle: drey
+  roles: [music]
+  active: false
+- handle: anesthetic
+  roles: [code]
+  active: false
+- handle: marcellus
+  roles: []
+  active: false
+- handle: peandoas
+  roles: []
+  active: false
+- handle: neurorebel
+  roles: [code]
+  active: false
+- handle: allamulax
+  roles: [music]
+  active: false
+- handle: horselogy
+  roles: [code, music]
+  active: false
+- handle: incognito
+  roles: [gfx]
+  active: false
+- handle: rephisto
+  roles: [gfx]
+  active: false
+- handle: scotoxin
+  roles: [code]
+  active: false
+- handle: shoggoth
+  roles: [code]
+  active: false

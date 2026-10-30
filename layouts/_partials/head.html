@@ -1,0 +1,44 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.remove('no-js')</script>
+
+{{/* Title and description */}}
+{{ $title := cond .IsHome (printf "%s · %s" site.Title site.Params.tagline) (printf "%s · %s" .Title site.Title) }}
+{{ $desc := site.Params.description }}
+{{ with .Description }}
+  {{ $desc = . }}
+{{ else }}
+  {{ if and .IsPage (eq .Section "prods") }}
+    {{ $desc = printf "%s for %s by Resident, released %s." .Params.format .Params.platform (.Date.Format "January 2006") }}
+  {{ else if .Summary }}
+    {{ $desc = .Summary | plainify | truncate 160 }}
+  {{ end }}
+{{ end }}
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<meta name="theme-color" content="#07060c">
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{/* Social cards */}}
+{{ $image := "images/logo.gif" | absURL }}
+{{ with .Resources.GetMatch "screen.*" }}{{ $image = .Permalink }}{{ end }}
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:type" content="{{ cond .IsPage "article" "website" }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="{{ $image }}">
+<meta name="twitter:card" content="summary_large_image">
+
+{{/* Assets */}}
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Press+Start+2P&display=swap">
+{{ $css := resources.Get "css/main.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{ with site.GetPage "/news" }}
+  {{ with .OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }} news">
+  {{ end }}
+{{ end }}

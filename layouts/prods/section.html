@@ -1,0 +1,29 @@
+{{ define "main" }}
+{{ partial "page-head.html" (dict "page" . "kicker" (printf "// %d releases" (len .Pages))) }}
+
+{{/* Formats in a fixed order, then any new ones */}}
+{{ $order := slice "Demo" "Intro" "64k" "4k" "256b" "128b" "Game" }}
+{{ $have := slice }}
+{{ range .Pages }}{{ $have = $have | append .Params.format }}{{ end }}
+{{ $formats := slice }}
+{{ range $order }}{{ if in $have . }}{{ $formats = $formats | append . }}{{ end }}{{ end }}
+{{ range uniq $have }}{{ if not (in $order .) }}{{ $formats = $formats | append . }}{{ end }}{{ end }}
+
+<div class="wrap">
+  <div class="filters" role="group" aria-label="Filter by type">
+    <button class="chip" type="button" data-filter="all" aria-pressed="true">All <span>{{ len .Pages }}</span></button>
+    {{ range $formats }}
+      <button class="chip" type="button" data-filter="{{ . | urlize }}" aria-pressed="false">{{ . }} <span>{{ len (where $.Pages "Params.format" .) }}</span></button>
+    {{ end }}
+  </div>
+
+  {{ range .Pages.GroupByDate "2006" }}
+    <section class="year-group">
+      <h2 class="year"><span>{{ .Key }}</span></h2>
+      <div class="prod-grid">
+        {{ range .Pages }}{{ partial "prod-card.html" . }}{{ end }}
+      </div>
+    </section>
+  {{ end }}
+</div>
+{{ end }}

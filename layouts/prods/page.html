@@ -1,0 +1,69 @@
+{{ define "main" }}
+{{ $img := .Resources.GetMatch "screen.*" }}
+<article class="wrap prod">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="{{ .Parent.RelPermalink }}">Prods</a> / <span>{{ .Params.format }}</span>
+  </nav>
+
+  <div class="prod-layout">
+    {{/* Screenshot or video */}}
+    <figure class="monitor">
+      <div class="screen crt">
+        {{ with .Params.youtube }}
+          <iframe src="https://www.youtube-nocookie.com/embed/{{ . }}" title="{{ $.Title }} video" allow="encrypted-media; picture-in-picture; fullscreen" loading="lazy"></iframe>
+        {{ else }}
+          {{ with $img }}<img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="Screenshot of {{ $.Title }}">{{ end }}
+        {{ end }}
+      </div>
+      <figcaption class="monitor-chin"><span>Resident</span><i class="led" aria-hidden="true"></i></figcaption>
+    </figure>
+
+    {{/* Info sheet */}}
+    <div class="prod-info">
+      <p class="kicker">{{ .Params.format }} · {{ .Params.platform }}</p>
+      <h1>{{ .Title }}</h1>
+      <dl class="nfo">
+        <div><dt>Released</dt><dd><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time></dd></div>
+        <div><dt>Platform</dt><dd>{{ .Params.platform }}</dd></div>
+        <div><dt>Type</dt><dd>{{ .Params.format }}</dd></div>
+        {{ with .Params.party }}
+          <div><dt>Party</dt><dd>{{ with .url }}<a href="{{ . }}">{{ $.Params.party.name }}</a>{{ else }}{{ .name }}{{ end }}</dd></div>
+        {{ end }}
+        {{ range .Params.credits }}
+          <div>
+            <dt>{{ .role }}</dt>
+            <dd>
+              {{- range $i, $who := .who -}}
+                {{ if $i }}, {{ end }}
+                {{- with site.GetPage (printf "/members/%s" (urlize $who)) }}<a href="{{ .RelPermalink }}">{{ $who }}</a>{{ else }}{{ $who }}{{ end -}}
+              {{- end -}}
+            </dd>
+          </div>
+        {{ end }}
+      </dl>
+
+      {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+
+      <div class="actions">
+        {{ with .Params.download }}
+          {{ with $.Resources.Get . }}
+            {{ $bytes := len .Content }}
+            {{ $size := cond (ge $bytes 1048576) (printf "%.1f MB" (div (float $bytes) 1048576)) (printf "%.0f KB" (math.Ceil (div (float $bytes) 1024))) }}
+            <a class="btn btn-hot" href="{{ .RelPermalink }}" download>Download <small class="btn-size">{{ $size }}</small></a>
+          {{ else }}
+            <a class="btn btn-hot" href="{{ . }}">Download</a>
+          {{ end }}
+        {{ end }}
+        {{ with .Params.pouet }}<a class="btn" href="https://www.pouet.net/prod.php?which={{ . }}">Pouet</a>{{ end }}
+        {{ with .Params.demozoo }}<a class="btn" href="https://demozoo.org/productions/{{ . }}/">Demozoo</a>{{ end }}
+      </div>
+    </div>
+  </div>
+
+  {{/* Older / newer */}}
+  <nav class="prev-next" aria-label="More prods">
+    {{ with .PrevInSection }}<a class="older" href="{{ .RelPermalink }}"><small>← Older</small>{{ .Title }}</a>{{ end }}
+    {{ with .NextInSection }}<a class="newer" href="{{ .RelPermalink }}"><small>Newer →</small>{{ .Title }}</a>{{ end }}
+  </nav>
+</article>
+{{ end }}

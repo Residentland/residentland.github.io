@@ -1,0 +1,35 @@
+baseURL = "https://www.residentland.info/"
+locale = "en"
+title = "Resident"
+capitalizeListTitles = false
+enableRobotsTXT = true
+
+[taxonomies]
+  member = "members"
+
+[pagination]
+  pagerSize = 10
+
+[params]
+  tagline = "demoscene group · since 2002"
+  description = "Resident is a demoscene group: demos, intros, sizecoding and games since 2002."
+  pouet = "https://www.pouet.net/groups.php?which=3381"
+  demozoo = "https://demozoo.org/groups/17099/"
+
+[menus]
+  [[menus.main]]
+    name = "Prods"
+    pageRef = "/prods"
+    weight = 10
+  [[menus.main]]
+    name = "News"
+    pageRef = "/news"
+    weight = 20
+  [[menus.main]]
+    name = "Members"
+    pageRef = "/members"
+    weight = 30
+  [[menus.main]]
+    name = "We love"
+    pageRef = "/links"
+    weight = 40
