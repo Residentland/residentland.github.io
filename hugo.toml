@@ -11,8 +11,8 @@ enableRobotsTXT = true
   pagerSize = 10
 
 [params]
-  tagline = "demoscene group · since 2002"
-  description = "Resident is a demoscene group: demos, intros, sizecoding and games since 2002."
+  tagline = "demoscene group · since 1998"
+  description = "Resident is a demoscene group: demos, intros, sizecoding and games since 1998."
   pouet = "https://www.pouet.net/groups.php?which=3381"
   demozoo = "https://demozoo.org/groups/17099/"
 
