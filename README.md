@@ -1,6 +1,6 @@
 # residentland.info
 
-The Resident demoscene group site, built with [Hugo](https://gohugo.io) (extended, 0.146 or newer).
+The Resident demoscene group site, built with [Hugo](https://gohugo.io) (extended, 0.146 or newer). Every push to `main` publishes the site.
 
 ## Run it locally
 
@@ -44,7 +44,7 @@ members: ["spritus", "tesla", "flexi"]   # links the prod to member pages
 Optional notes about the prod go here.
 ```
 
-A new `format` shows up as a filter on the prods page automatically. The Download button shows the file size for archives kept in the folder. GitHub rejects single files over 100 MB, so link bigger releases from elsewhere. Names in `credits` that match a member handle are linked to that member's page.
+A new `format` shows up as a filter on the prods page automatically. Names in `credits` that match a member handle are linked to that member's page. GitHub rejects files over 100 MB, so link bigger releases from elsewhere.
 
 ## Add news
 
@@ -58,29 +58,8 @@ date: 2026-11-15
 Text in Markdown.
 ```
 
-`content/news/hello-hugo.md` is a ready-made announcement for the move, saved as a draft. Delete its `draft: true` line to publish it.
-
 ## Edit the crew and links
 
 - Members: `data/members.yaml`
 - "We love" links: `data/links.yaml`
 - Tagline, Pouet and Demozoo links: `[params]` in `hugo.toml`
-
-## Layout
-
-| Path | What |
-| --- | --- |
-| `layouts/home.html` | Front page with the hero and all prods |
-| `layouts/prods/` | Prod list with filters, and the single prod page |
-| `layouts/members/` | Member roster and each member's prods |
-| `assets/js/fx.js` | Hero effect: plasma, copper bars, logo wobble |
-| `assets/css/main.css` | All styles |
-
-## Deploy to GitHub Pages
-
-1. Push this folder to the `main` branch of the GitHub repo.
-2. In the repo, open **Settings → Pages** and set **Source** to **GitHub Actions**. `.github/workflows/hugo.yml` then builds and publishes the site on every push.
-3. Still in **Settings → Pages**, set **Custom domain** to `www.residentland.info` and turn on **Enforce HTTPS** once the certificate is issued.
-4. At your DNS provider, point `www` at GitHub with a `CNAME` record to `<your-github-user-or-org>.github.io`. For the bare `residentland.info`, add `A` records to `185.199.108.153`, `185.199.109.153`, `185.199.110.153` and `185.199.111.153`.
-
-Old Blogger addresses such as `/p/nested-64k.html`, `/p/members.html` and `/2019/06/new-site.html` redirect to their new pages.
